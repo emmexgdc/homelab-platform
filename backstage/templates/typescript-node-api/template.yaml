@@ -1,0 +1,61 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: typescript-node-api
+  title: TypeScript Node API
+  description: Create a TypeScript Node.js API with Docker, CI, health checks, metrics, and GitOps manifests.
+  tags:
+    - nodejs
+    - typescript
+    - api
+spec:
+  owner: platform
+  type: service
+
+  parameters:
+    - title: Service details
+      required:
+        - appName
+        - port
+        - registry
+      properties:
+        appName:
+          title: App Name
+          type: string
+          description: Unique service name
+        port:
+          title: Port
+          type: number
+          default: 8080
+        registry:
+          title: Image Registry
+          type: string
+          default: ghcr.io/emmexgdc
+        ingress:
+          title: Enable Ingress
+          type: boolean
+          default: true
+        host:
+          title: Hostname
+          type: string
+          description: Required if ingress is enabled
+        monitoring:
+          title: Enable Monitoring
+          type: boolean
+          default: true
+        secrets:
+          title: Enable Secrets
+          type: boolean
+          default: true
+
+  steps:
+    - id: log
+      name: Show selected values
+      action: debug:log
+      input:
+        message: Creating ${{ parameters.appName }} using the TypeScript Node API platform template.
+
+  output:
+    text:
+      - title: Next step
+        content: This template metadata is ready. Next we wire it to generate files and create GitOps PRs.

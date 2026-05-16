@@ -49,11 +49,25 @@ spec:
           default: true
 
   steps:
+    - id: fetch-base
+      name: Generate service files
+      action: fetch:template
+      input:
+        url: ../../starter/typescript-node-api
+        values:
+          appName: ${{ parameters.appName }}
+          port: ${{ parameters.port }}
+          registry: ${{ parameters.registry }}
+          ingress: ${{ parameters.ingress }}
+          host: ${{ parameters.host }}
+          monitoring: ${{ parameters.monitoring }}
+          secrets: ${{ parameters.secrets }}
+
     - id: log
       name: Show selected values
       action: debug:log
       input:
-        message: Creating ${{ parameters.appName }} using the TypeScript Node API platform template.
+        message: Generated ${{ parameters.appName }} from TypeScript starter template.
 
   output:
     text:

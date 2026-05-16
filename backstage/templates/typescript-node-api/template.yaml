@@ -31,10 +31,36 @@ spec:
           title: Image Registry
           type: string
           default: ghcr.io/emmexgdc
-        host:
-          title: Hostname
-          type: string
-          description: Ingress host (e.g. my-app.homelab.emmexgdc.uk)
+        monitoring:
+          title: Enable Monitoring
+          type: boolean
+          default: true
+          description: Generate ServiceMonitor for Prometheus
+        secrets:
+          title: Enable Secrets
+          type: boolean
+          default: false
+          description: Generate ExternalSecret resource (requires Vault path)
+        ingress:
+          title: Enable Ingress
+          type: boolean
+          default: false
+          description: Expose service via Nginx ingress with TLS
+      dependencies:
+        ingress:
+          oneOf:
+            - properties:
+                ingress:
+                  const: false
+            - properties:
+                ingress:
+                  const: true
+                host:
+                  title: Hostname
+                  type: string
+                  description: e.g. my-app.homelab.emmexgdc.uk
+              required:
+                - host
 
   steps:
     - id: fetch-app
@@ -67,6 +93,9 @@ spec:
           port: ${{ parameters.port }}
           image: ${{ parameters.registry }}/${{ parameters.appName }}
           host: ${{ parameters.host }}
+          monitoring: ${{ parameters.monitoring }}
+          secrets: ${{ parameters.secrets }}
+          ingress: ${{ parameters.ingress }}
 
     - id: publish-gitops-pr
       name: Open PR to homelab-gitops

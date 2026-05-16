@@ -4,3 +4,9 @@ kind: Kustomization
 resources:
 - deployment.yaml
 - service.yaml
+{%- if values.monitoring %}
+- servicemonitor.yaml
+{%- endif %}
+{%- if values.secrets %}
+- externalsecret.yaml
+{%- endif %}

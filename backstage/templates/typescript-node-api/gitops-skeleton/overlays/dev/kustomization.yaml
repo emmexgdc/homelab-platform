@@ -6,6 +6,9 @@ namespace: ${{ values.appName }}-dev
 resources:
 - ../../base
 - configmap.yaml
+{%- if values.ingress %}
+- ingress.yaml
+{%- endif %}
 
 patches:
 - patch: |-

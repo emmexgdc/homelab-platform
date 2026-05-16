@@ -54,7 +54,6 @@ spec:
       action: fetch:template
       input:
         url: ../../starter/typescript-node-api
-        copyWithoutTemplating: []
         templateFileExtension: true
         values:
           appName: ${{ parameters.appName }}

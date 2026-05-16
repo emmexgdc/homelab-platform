@@ -12,6 +12,8 @@ spec:
     - title: Service details
       properties:
         port:
+          title: Port
+          type: number
           default: 8080
         registry:
           title: Image Registry

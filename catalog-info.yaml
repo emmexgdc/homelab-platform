@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: Location
+metadata:
+  name: homelab-platform-templates
+  description: Backstage templates for the homelab platform
+spec:
+  targets:
+    - ./backstage/templates/react-frontend/template.yaml
+    - ./backstage/templates/python-api/template.yaml
+    - ./backstage/templates/go-api/template.yaml
+    - ./backstage/templates/typescript-node-api/template.yaml

@@ -1,0 +1,31 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: go-api-template
+  title: Go API App
+  description: Create a new Go API service using the homelab platform template
+spec:
+  owner: user:guest
+  type: service
+
+  parameters:
+    - title: App information
+      required:
+        - app_name
+      properties:
+        app_name:
+          title: App Name
+          type: string
+          description: Name of the app to generate
+
+  steps:
+    - id: log
+      name: Log app name
+      action: debug:log
+      input:
+        message: Creating ${{ parameters.app_name }}
+
+  output:
+    text:
+      - title: Next step
+        content: Run the homelab-platform generator locally for now.

@@ -11,13 +11,22 @@ metadata:
 spec:
   owner: platform
   type: service
+
   parameters:
     - title: Service details
+      required:
+        - appName
+        - port
+        - registry
       properties:
+        appName:
+          title: App Name
+          type: string
+          description: Unique service name (lowercase, dash-separated)
         port:
           title: Port
           type: number
-          default: 8000      # changed from 80
+          default: 8000
         registry:
           title: Image Registry
           type: string

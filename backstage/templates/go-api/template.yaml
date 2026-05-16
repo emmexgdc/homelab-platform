@@ -8,13 +8,24 @@ metadata:
     - go
     - api
 spec:
+  owner: platform
+  type: service
+
   parameters:
     - title: Service details
+      required:
+        - appName
+        - port
+        - registry
       properties:
+        appName:
+          title: App Name
+          type: string
+          description: Unique service name (lowercase, dash-separated)
         port:
           title: Port
           type: number
-          default: 8080
+          default: 8000
         registry:
           title: Image Registry
           type: string
@@ -65,7 +76,7 @@ spec:
       name: Publish app repo to GitHub
       action: publish:github
       input:
-        description: ${{ parameters.appName }} Go API
+        description: ${{ parameters.appName }} Python API
         repoUrl: github.com?owner=emmexgdc&repo=${{ parameters.appName }}
         defaultBranch: main
         repoVisibility: public

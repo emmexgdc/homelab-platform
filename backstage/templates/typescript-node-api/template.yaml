@@ -46,6 +46,7 @@ spec:
           title: Enable Secrets
           type: boolean
           default: true
+
   steps:
     - id: fetch-base
       name: Generate service files
@@ -60,12 +61,27 @@ spec:
           host: ${{ parameters.host }}
           monitoring: ${{ parameters.monitoring }}
           secrets: ${{ parameters.secrets }}
+
+    - id: publish
+      name: Publish to GitHub
+      action: publish:github
+      input:
+        allowedHosts: ['github.com']
+        description: ${{ parameters.appName }}
+        repoUrl: github.com?owner=emmexgdc&repo=${{ parameters.appName }}
+        defaultBranch: main
+        repoVisibility: public
+
     - id: log
       name: Show selected values
       action: debug:log
       input:
         message: Generated ${{ parameters.appName }} from TypeScript starter template.
+
   output:
+    links:
+      - title: Repository
+        url: ${{ steps.publish.output.remoteUrl }}
     text:
       - title: Next step
-        content: Template generated files. Next we wire publish:github.
+        content: Repo created. Next we wire GitOps manifest generation.

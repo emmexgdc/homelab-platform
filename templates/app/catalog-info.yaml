@@ -1,12 +1,45 @@
-apiVersion: backstage.io/v1alpha1
-kind: Component
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
 metadata:
-  name: __APP_NAME__
-  description: __APP_NAME__ service
-  tags:
-    - kubernetes
-    - gitops
+  name: typescript-node-api
+  title: TypeScript Node API
+  description: Create a Node.js TypeScript API
 spec:
+  owner: group:platform
   type: service
-  lifecycle: production
-  owner: platform
+
+  parameters:
+    - title: Service info
+      required:
+        - appName
+        - port
+      properties:
+        appName:
+          title: Application Name
+          type: string
+        port:
+          title: Port
+          type: number
+          default: 8080
+
+  steps:
+    - id: fetch
+      name: Generate service files
+      action: fetch:template
+      input:
+        url: ./skeleton
+        values:
+          appName: ${{ parameters.appName }}
+          port: ${{ parameters.port }}
+
+    - id: log
+      name: Log output
+      action: debug:log
+      input:
+        message: "Generated ${{ parameters.appName }} on port ${{ parameters.port }}"
+
+  output:
+    text:
+      - title: Next steps
+        content: |
+          App generated locally. Next phase will add publish:github.

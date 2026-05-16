@@ -8,7 +8,7 @@ client.collectDefaultMetrics();
 
 app.get("/", (_req, res) => {
   res.json({
-    app: "__APP_NAME__",
+    app: "${{ values.appName }}",
     status: "ok"
   });
 });
@@ -25,5 +25,5 @@ app.get("/metrics", async (_req, res) => {
 });
 
 app.listen(port, "0.0.0.0", () => {
-  console.log(`__APP_NAME__ listening on port ${port}`);
+  console.log(`${{ values.appName }} listening on port ${port}`);
 });

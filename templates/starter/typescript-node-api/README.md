@@ -1,4 +1,4 @@
-# __APP_NAME__
+# ${{ values.appName }}
 TypeScript Node.js API generated from the homelab IDP starter template.
 ## Run locally
 ```bash
@@ -21,5 +21,5 @@ GET /metrics
 
 Docker
 
-docker build -t __APP_NAME__:local .
-docker run --rm -p 8080:8080 __APP_NAME__:local
+docker build -t ${{ values.appName }}:local .
+docker run --rm -p 8080:8080 ${{ values.appName }}:local

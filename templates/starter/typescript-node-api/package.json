@@ -1,5 +1,5 @@
 {
-  "name": "__APP_NAME__",
+  "name": "${{ values.appName }}",
   "version": "1.0.0",
   "private": true,
   "scripts": {

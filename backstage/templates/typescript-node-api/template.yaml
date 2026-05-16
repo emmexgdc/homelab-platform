@@ -66,7 +66,6 @@ spec:
       name: Publish to GitHub
       action: publish:github
       input:
-        allowedHosts: ['github.com']
         description: ${{ parameters.appName }}
         repoUrl: github.com?owner=emmexgdc&repo=${{ parameters.appName }}
         defaultBranch: main

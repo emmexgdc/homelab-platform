@@ -9,4 +9,4 @@ spec:
     - ./backstage/templates/python-api/template.yaml
     - ./backstage/templates/go-api/template.yaml
     - ./backstage/templates/typescript-node-api/template.yaml
-    - ./backstage/templates/add-gitops-infra/template.yaml
+    - ./backstage/templates/add-gitops-infra/template.yaml      # NEW
